@@ -1,31 +1,58 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Base</title>
-        <link rel="stylesheet" href="../../assets/css/main.css">
-        <link rel="stylesheet" href="../../assets/fonts/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
-    </head>
-    <nav class="navbar" style="height: 80px;">
+{% block head %}
 
-    </nav>    
-    <body>
-        {% block body %}
-        
-        {% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" />
+</head>
+<nav class="navbar" style="height: 80px;">
+    <div>
+        Microblog:
+        <a href="{{ url_for('index') }}">Home</a>
+        {% if current_user.is_anonymous %}
+        <a href="{{ url_for('login') }}">Login</a>
+        {% else %}
+        <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% endif %}
+    </div>
+</nav>
+
+{% endblock %}
+
+<body>
+    {% block body %}
+    <hr>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% endblock %}
+
+</body>
 <!-- Footer -->
 <footer id="footer">
     <div class="container">
         <ul class="icons">
             <li><a href="https://www.tiktok.com/@amantle_bogacu" class="fab fa-tiktok" class="icon"></a></li>
-            <li><a href="https://www.instagram.com/rxrely.tshadi/" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="https://www.instagram.com/rxrely.tshadi/" class="icon fa-instagram"><span
+                        class="label">Instagram</span></a></li>
         </ul>
     </div>
-    <p class="text-muted mb-0">Copyright © 2023 Brand</p> 
+    <p class="text-muted mb-0">Copyright © 2023 Brand</p>
 </footer>
 
-  
+
 </html>
