@@ -6,24 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Base</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/css/main.css')}}">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='/fonts/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/static/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" />
 </head>
-<nav class="navbar" style="height: 80px;">
-    <div>
-        Microblog:
-        <a href="{{ url_for('index') }}">Home</a>
-        {% if current_user.is_anonymous %}
-        <a href="{{ url_for('login') }}">Login</a>
-        {% else %}
-        <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
-        <a href="{{ url_for('logout') }}">Logout</a>
-        {% endif %}
-    </div>
-</nav>
 
 {% endblock %}
 
@@ -43,6 +31,8 @@
 
 </body>
 <!-- Footer -->
+{% block footer %}
+
 <footer id="footer">
     <div class="container">
         <ul class="icons">
@@ -53,6 +43,6 @@
     </div>
     <p class="text-muted mb-0">Copyright © 2023 Brand</p>
 </footer>
-
+{% endblock %}
 
 </html>
