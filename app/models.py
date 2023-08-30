@@ -1,20 +1,29 @@
 from datetime import datetime
 from hashlib import md5
-from app import db
-from flask_login import UserMixin
+from app import app, db
 
 
-class User(UserMixin, db.Model):
+class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True)
-
+    name = db.Column(db.String(100), nullable=False)
+    group = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    ingredients = db.Column(db.Text, nullable=False)
+    steps = db.Column(db.Text, nullable=False)
+    notes = db.Column(db.Text)
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return '<Recipe {}>'.format(self.name)
 
+    def __init__(self, name, group, description, ingredients, steps, notes=None):
+        self.name = name
+        self.group = group
+        self.description = description
+        self.ingredients = ingredients
+        self.steps = steps
+        self.notes = notes
+with app.app_context():
+    db.create_all()
 
-    def avatar(self, size):
-        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
-        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
-            digest, size)
-
+if __name__ == '__main__':
+    app.run(debug=True)

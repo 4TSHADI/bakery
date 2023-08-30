@@ -26,20 +26,21 @@
             <div class="box">
                 <div class="image fit"><img src="images/pic03.jpg" alt="" /></div>
                 <div class="inner">
-                    <h3>Recipe name</h3>
+                    <h3>Add New Recipe</h3>
                     <p>description</p>
-                    <a href="{{ url_for('recipecard') }}" class="button style3 fit" data-poptrox="youtube,800x400">Recipe</a>
+                    <a href="{{ url_for('new_recipe') }}" class="button style3 fit" data-poptrox="youtube,800x400">Recipe</a>
                 </div>
             </div>
+            {% for recipe in recipes %}
             <div class="box">
                 <div class="image fit"><img src="images/pic03.jpg" alt="" /></div>
                 <div class="inner">
-                    <h3>Recipe name</h3>
-                    <p>description</p>
+                    <h3>{{ recipe.name }}</h3>
+                    <p>{{ recipe.description }}</p>
                     <a href="{{ url_for('recipecard') }}" class="button style3 fit" data-poptrox="youtube,800x400">Recipe</a>
                 </div>
             </div>
-
+            {% endfor %}
         </div>
 
     </div>
