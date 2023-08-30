@@ -4,7 +4,6 @@ from wtforms.validators import DataRequired
 from app.models import Recipe
 
 
-
 class EditRecipeForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     group = StringField('Group', validators=[DataRequired()])
