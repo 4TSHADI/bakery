@@ -7,3 +7,11 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    
+UPLOAD_FOLDER_UNIX = "./app/static/images/recipe"
+# Define the upload path with backslashes (for Windows)
+UPLOAD_FOLDER_WINDOWS = '.\\app\\static\\images\\recipe'
+
+# Use one of the defined paths based on the operating system
+UPLOAD_FOLDER = UPLOAD_FOLDER_WINDOWS if os.name == 'nt' else UPLOAD_FOLDER_UNIX
+
